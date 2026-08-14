@@ -1,0 +1,14 @@
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\DesignPatterns.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\DesignPatterns.AssemblyInfoInputs.cache
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\DesignPatterns.AssemblyInfo.cs
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\DesignPatterns.csproj.CoreCompileInputs.cache
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\bin\Debug\net10.0\DesignPatterns.exe
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\bin\Debug\net10.0\DesignPatterns.deps.json
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\bin\Debug\net10.0\DesignPatterns.runtimeconfig.json
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\bin\Debug\net10.0\DesignPatterns.dll
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\bin\Debug\net10.0\DesignPatterns.pdb
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\DesignPatterns.dll
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\refint\DesignPatterns.dll
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\DesignPatterns.pdb
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\DesignPatterns.genruntimeconfig.cache
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\ref\DesignPatterns.dll
