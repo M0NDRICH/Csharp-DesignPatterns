@@ -12,3 +12,4 @@ D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\refint\DesignPatt
 D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\DesignPatterns.pdb
 D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\DesignPatterns.genruntimeconfig.cache
 D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\ref\DesignPatterns.dll
+D:\MyC#Projects\C#DesignPatterns\Test1\Test1\obj\Debug\net10.0\DesignPatterns.sourcelink.json

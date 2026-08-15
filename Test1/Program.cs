@@ -18,7 +18,10 @@ using DesignPatterns.Behavioral.Command.Undoable;
 using DesignPatterns.Behavioral.Template.TemplateMethod;
 using System.Security.AccessControl;
 using DesignPatterns.Behavioral.Observer.Good_Example;
-using DesignPatterns.Behavioral.Mediator;
+//using DesignPatterns.Behavioral.Mediator;
+using DesignPatterns.Behavioral.Mediator.MediatorWithObserver;
+//using DesignPatterns.Behavioral.ChainOfResponsibility;
+using DesignPatterns.Behavioral.ChainOfResponsibility.GoodSolution;
 //using DesignPatterns.Behavioral.Observer;
 //using DesignPatterns.Behavioral.Template.BadExample;
 //using DesignPatterns.Behavioral.Template.Strategy;
@@ -447,12 +450,59 @@ ds.SetValues(new() { 1, 2, 3 });
 
 // Let's say we have a blog that lists all of your posts, and you can select a post and then edit that post's title.
 
+/*
 var postsDialogBox = new PostDialogBox();
 
 postsDialogBox.SimulateUserInteraction();
+*/
 
+#region -- Mediator with Observer Pattern --
+/*
+var postDialogBox = new PostsDialogBox();
+postDialogBox.SimulateUserInteraction();
+*/
+#endregion
 
 #endregion
+
+#region -- Chain Of Responsibility Pattern --
+// Chain of Responsibility Pattern
+
+// The Chain of Responsibility pattern allows building a chain of objects to handle a request. A request is passed through a chain of handlers, each capable of either handling the request or passing it to the next handler in the chain.
+
+// To understand this, let's go through an example, where we first create a simple, naive, solution, then refactor it into something more maintainable using the Chain of Responsibility pattern.
+
+// Let's say we have a web page that contains some information that only admins of the website can access, such as a page that allows an admin to manage the website's users - e.g., create new users, get information, update user information, etc.
+
+// Say that a user makes a request to the website's server, but before returning the web page, the user's data must be validated (e.g., trim any whitespaces around user-entered data), authenticate the user (e.g., check their username and password is correct), and then log some information onto the server about this request. If any of those steps fail, then "access denied" is returned to the user.
+
+#region -- Naive Solution --
+/*
+var server = new WebServer();
+var request = new HttpRequest("danny", "123");
+server.Handle(request);
+*/
+#endregion
+
+#region -- Good Solution --
+var validator = new Validator();
+var authenticator = new Authenticator();
+var logger = new Logger();
+
+validator.SetNextHandler(authenticator).SetNextHandler(logger);
+
+var server = new WebServer(validator);
+var request = new HttpRequest(password: "123", username: "danny");
+server.Handle(request);
+
+Console.WriteLine("");
+var request2 = new HttpRequest(password: "123d", username: "danny");
+server.Handle(request2);
+
+#endregion 
+
+#endregion
+
 #endregion
 
 
