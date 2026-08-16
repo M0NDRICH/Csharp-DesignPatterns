@@ -1,5 +1,4 @@
-﻿//Encapsulation
-
+﻿
 //using DesignPatterns.OopPrinciples.Composition;
 using DesignPatterns.OopPrinciples.Coupling;
 using DesignPatterns.OopPrinciples.Abstraction;
@@ -23,6 +22,7 @@ using DesignPatterns.Behavioral.Mediator.MediatorWithObserver;
 //using DesignPatterns.Behavioral.ChainOfResponsibility;
 using DesignPatterns.Behavioral.ChainOfResponsibility.GoodSolution;
 using DesignPatterns.Behavioral.Visitor.GoodSolution;
+using DesignPatterns.Behavioral.Interpreter;
 //using DesignPatterns.Behavioral.Observer;
 //using DesignPatterns.Behavioral.Template.BadExample;
 //using DesignPatterns.Behavioral.Template.Strategy;
@@ -535,6 +535,7 @@ foreach (var client in clients)
 #endregion
 
 #region -- Good Solution --
+/*
 var clients = new List<Client>
 {
     new RetailClient("Debinhams", "team@debinhams.co.uk"),
@@ -547,8 +548,35 @@ foreach (var client in clients)
     client.Accept(new EmailVisitor { });
     //client.Accept(new PDFExportVisitor());
 }
+*/
+#endregion
 
 #endregion
+
+#region -- Interpreter Pattern --
+// Interpreter Pattern
+
+// The Interpreter pattern defines a way to represent and evaluate sentences in a language by using an abstract class for expressions, which concrete subclasses implement to interpret specific parts of the language's grammar.
+
+// The interpreter pattern is probably the most complex and least used of the GoF design patterns. Most courses on design patterns that I've seen don't include the interpreter pattern. However, at the beginning of this course, I promised that I'd teach you all 23 GoF design patterns, so let's have a crack at it! After the examle, I'll also discuss why this pattern is rarely used.
+
+// Example use-cases:
+// -> Parsing and executing SQL queries, where the interpreter pattern helps parse the query syntax and execute it against a database.
+// -> Calculators or scientific software that interpret and evaluate complex mathematical formulas entered by users.
+// -> Web frameworks that render HTML templates with embedded expressions or directives - i.e. templates - (e.g., {{ variable }} in Django or <% expression %> in JSP).
+
+// The components of the Interpreter pattern:
+// - Abstract Expression: Establishes the interface for all expressions within the language.
+// - Terminal Expression: Represents the fundamental components of the language, such as numbers or variables.
+// Non-terminal Expression: Represents more complex expressions that are composed of other expressions using operators or functions. Above, AdditionExpression and MultiplicationExpression are non-terminal, or "composite", expressions.
+// Interpreter: Implements the logic for interpretation and determines how to evaluate different types of expressions.
+
+string input = "2 + 3 - 4 + 10";
+
+Context context = new Context();
+Interpreter2 interpreter = new Interpreter2(context);
+int result = interpreter.Interpret(input);
+Console.WriteLine("Result: "+ result);
 
 #endregion
 
