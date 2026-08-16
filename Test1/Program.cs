@@ -22,6 +22,7 @@ using DesignPatterns.Behavioral.Observer.Good_Example;
 using DesignPatterns.Behavioral.Mediator.MediatorWithObserver;
 //using DesignPatterns.Behavioral.ChainOfResponsibility;
 using DesignPatterns.Behavioral.ChainOfResponsibility.GoodSolution;
+using DesignPatterns.Behavioral.Visitor.GoodSolution;
 //using DesignPatterns.Behavioral.Observer;
 //using DesignPatterns.Behavioral.Template.BadExample;
 //using DesignPatterns.Behavioral.Template.Strategy;
@@ -485,6 +486,7 @@ server.Handle(request);
 #endregion
 
 #region -- Good Solution --
+/*
 var validator = new Validator();
 var authenticator = new Authenticator();
 var logger = new Logger();
@@ -498,8 +500,55 @@ server.Handle(request);
 Console.WriteLine("");
 var request2 = new HttpRequest(password: "123d", username: "danny");
 server.Handle(request2);
+*/
+#endregion
 
-#endregion 
+#endregion
+
+#region -- Visitor Pattern ---
+// Visitor Pattern
+
+// The Visitor Pattern separate the algorithm or behaviors, from the objects on which they operate
+
+// Say that you are a developer for a marketing agency, that has different types of clients:
+// -> Restaurants
+// -> Law firms
+// -> Retailers
+
+#region -- Naive Solution --
+// Get list of clients (e.g. from db)
+
+/*
+var clients = new List<Client>
+{
+    new RetailerClient("Debinhams", "team@binhams.co.uk"),
+    new RestaurantClient("Frankie and Bennys", "frank@fandb.com"),
+    new LawClient("Hamlin McGil Law Firm", "howard@handm.com")
+
+};
+
+foreach (var client in clients)
+{
+    client.SendEmail();
+}
+*/
+#endregion
+
+#region -- Good Solution --
+var clients = new List<Client>
+{
+    new RetailClient("Debinhams", "team@debinhams.co.uk"),
+    new RestaurantClient("Frankie and Bennys", "frank@fandb.com"),
+    new LawClient("Hamlin McGil Law Firm", "howard@handm.com")
+};
+
+foreach (var client in clients)
+{
+    client.Accept(new EmailVisitor { });
+    //client.Accept(new PDFExportVisitor());
+}
+
+#endregion
 
 #endregion
 
