@@ -23,6 +23,7 @@ using DesignPatterns.Behavioral.Mediator.MediatorWithObserver;
 using DesignPatterns.Behavioral.ChainOfResponsibility.GoodSolution;
 using DesignPatterns.Behavioral.Visitor.GoodSolution;
 using DesignPatterns.Behavioral.Interpreter;
+using DesignPatterns.Structural.Composite;
 //using DesignPatterns.Behavioral.Observer;
 //using DesignPatterns.Behavioral.Template.BadExample;
 //using DesignPatterns.Behavioral.Template.Strategy;
@@ -571,6 +572,7 @@ foreach (var client in clients)
 // Non-terminal Expression: Represents more complex expressions that are composed of other expressions using operators or functions. Above, AdditionExpression and MultiplicationExpression are non-terminal, or "composite", expressions.
 // Interpreter: Implements the logic for interpretation and determines how to evaluate different types of expressions.
 
+/*
 string input = "2 + 3 - 4 + 10";
 
 Context context = new Context();
@@ -578,10 +580,52 @@ Interpreter2 interpreter = new Interpreter2(context);
 int result = interpreter.Interpret(input);
 Console.WriteLine("Result: "+ result);
 
+*/
 #endregion
 
 #endregion
 
+#region -- Structural  Design Patterns --
+// Structural Design Patterns
+
+// Structural design patterns focus on the composition of classes and objects to form larger structures and systems. These patterns primarily deal with how classes and objects can be combined to form larger, more complex structures while keeping these structures flexible and efficient. The key objective of structural design patterns is to provide solutions to design problems related to object composition and structure, allowing for better organization and management of code.
+
+// Structural design patterns help to achieve several important golas in software development:
+// => Promote code reusability and modularity by defining clear and standardized ways to compose and organize classes and objects. This makes the codebase more maintainable and scalable over time, as changes or additions to the system can be made more easily.
+// => Enhance flexibility and extensibility by allowing the system's structure to evolve without requiring major changes to the existing code. This is achieved by decoupling the components of the system and promoting loose coupling between different parts.
+// => Improve performance and resource utilization by optimizing the way objects interact and collaborate within the system, thereby enhancing overall system efficiency.
+
+// Overall, these patterns contribute to building robust, adaptable, and well-organized software systems that are easier to understand, maintain, and extend over time.
+
+#region -- Composite Pattern --
+// Composite Pattern
+
+// The Composite pattern is a structural design pattern that enables the creation of tree-like structure to represent collections of objects, where both individual objects and groups of objects are treated in a unified manner.
+
+var Box1 = new Box();
+var Box2 = new Box();
+var Box3 = new Box();
+var Box4 = new Box();
+var Box5 = new Box();
+
+Keyboard keyboard = new();
+Mouse mouse = new();
+Microphone mic = new();
+
+Box1.Add(Box2).Add(Box3);
+
+Box2.Add(mic);
+Box3.Add(Box4).Add(Box5);
+
+Box4.Add(keyboard);
+Box5.Add(mouse);
+
+var result = Box1.GetPrice();
+Console.WriteLine(result);
+
+#endregion
+
+#endregion
 
 #endregion
 
