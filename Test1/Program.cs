@@ -12,7 +12,7 @@ using DesignPatterns.Behavioral.State.GoodSolution;
 using DesignPatterns.Behavioral.Strategy.GoodExample;
 using DesignPatterns.Behavioral.Iterator.GoodExample;
 //using DesignPatterns.Behavioral.Command;
-using DesignPatterns.Behavioral.Command.GoodSolution;
+//using DesignPatterns.Behavioral.Command.GoodSolution;
 using DesignPatterns.Behavioral.Command.Undoable;
 using DesignPatterns.Behavioral.Template.TemplateMethod;
 using System.Security.AccessControl;
@@ -24,6 +24,9 @@ using DesignPatterns.Behavioral.ChainOfResponsibility.GoodSolution;
 using DesignPatterns.Behavioral.Visitor.GoodSolution;
 using DesignPatterns.Behavioral.Interpreter;
 using DesignPatterns.Structural.Composite;
+using DesignPatterns.Structural.Adapter;
+using DesignPatterns.Structural.Adapter.Package;
+using DesignPatterns.Structural.Bridge.GoodSolution;
 //using DesignPatterns.Behavioral.Observer;
 //using DesignPatterns.Behavioral.Template.BadExample;
 //using DesignPatterns.Behavioral.Template.Strategy;
@@ -601,7 +604,7 @@ Console.WriteLine("Result: "+ result);
 // Composite Pattern
 
 // The Composite pattern is a structural design pattern that enables the creation of tree-like structure to represent collections of objects, where both individual objects and groups of objects are treated in a unified manner.
-
+/*
 var Box1 = new Box();
 var Box2 = new Box();
 var Box3 = new Box();
@@ -622,6 +625,54 @@ Box5.Add(mouse);
 
 var result = Box1.GetPrice();
 Console.WriteLine(result);
+*/
+#endregion
+
+#region -- Adapter Pattern --
+// Adapter Pattern
+
+// The adapter pattern is a structural design pattern that allows incompatible interfaces between classes to work together by providing a wrapper that translates one interface into another.
+
+// Let's create scenario that will help you to understand this pattern, and its use-cases;
+
+// Say we have a video editing application that allows users to upload a video and change the color of the video. The application provides preset color options for the user to select, such as black and white, or midnight purple.
+
+/*
+var videoEditor = new VideoEditor(new Video{});
+videoEditor.ApplyColor(new RainbowColor(new Rainbow()));
+*/
+#endregion
+
+#region -- Bridge Pattern --
+// The bridge pattern is a design pattern that separates a large class, or a set of related classes into two hierarchies so that they can be developed independently from each other.
+
+// Say that we have a remote for controlling a radio. There are multiple different brands of radio, and there are different types of remotes:
+
+// Every time that we add a new brand, e.g.: Samsung, we'd have to create three new classes; SamsungRemote, AdvancedSamsungRemote and MegaSamsungRemote. And if we create a new type of remote, e.g., RadioAndTVRemote, then we'd have to create a new class for every brand, so RadioAndTVLG, RadioAndTVSony, RadioAndTVSamsung. This is not maintainable.
+
+#region -- Bad Solution --
+/*
+var lgRemote = new LGRemote();
+lgRemote.TurnOn();
+lgRemote.TurnOff();
+
+var lgRadioAndTVLGRemote = new LGRadioAndTVRemote();
+lgRadioAndTVLGRemote.ControlTV(); // Now controlling LG TV
+lgRadioAndTVLGRemote.TurnOn(); // Turning LG device on
+lgRadioAndTVLGRemote.VolumeUp(); // Turning LG device volume up
+*/
+#endregion
+
+#region -- Good Solution --
+var lgRemoteControl = new RemoteControl(new LGRadio());
+lgRemoteControl.TurnOn();
+lgRemoteControl.TurnOff();
+
+var advanceSonyRemoteControl = new AdvancedRemote(new SonyRadio());
+advanceSonyRemoteControl.TurnOn();
+advanceSonyRemoteControl.TurnOff();
+advanceSonyRemoteControl.SetChannel(2);
+#endregion
 
 #endregion
 
