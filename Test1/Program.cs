@@ -27,6 +27,9 @@ using DesignPatterns.Structural.Composite;
 using DesignPatterns.Structural.Adapter;
 using DesignPatterns.Structural.Adapter.Package;
 using DesignPatterns.Structural.Bridge.GoodSolution;
+using DesignPatterns.Structural.Proxy.GoodSolution;
+using DesignPatterns.Structural.Proxy.GoodSolution.Package;
+using DesignPatterns.Structural.Flyweight.GoodSolution;
 //using DesignPatterns.Behavioral.Observer;
 //using DesignPatterns.Behavioral.Template.BadExample;
 //using DesignPatterns.Behavioral.Template.Strategy;
@@ -664,6 +667,7 @@ lgRadioAndTVLGRemote.VolumeUp(); // Turning LG device volume up
 #endregion
 
 #region -- Good Solution --
+/*
 var lgRemoteControl = new RemoteControl(new LGRadio());
 lgRemoteControl.TurnOn();
 lgRemoteControl.TurnOff();
@@ -672,6 +676,69 @@ var advanceSonyRemoteControl = new AdvancedRemote(new SonyRadio());
 advanceSonyRemoteControl.TurnOn();
 advanceSonyRemoteControl.TurnOff();
 advanceSonyRemoteControl.SetChannel(2);
+*/
+#endregion
+
+#endregion
+
+#region -- Proxy Pattern --
+// The proxy pattern is a structural design pattern that provides a proxy, or agent, object to control access to another object, allowing for additional functionality such as caching, logging, lazy loading or access control, without changing the client's code.
+
+#region -- Bad Solution --
+/*
+var videoList = new VideoList();
+String[] videoIds = { "1234", "abcde", "javasc123"};
+
+foreach(var videoId in videoIds)
+{
+    videoList.Add(new YouTubeVideo(videoId));
+}
+
+videoList.Watch("abcde");
+*/
+#endregion
+
+#region -- Good Solution --
+/*
+var videoList = new VideoList();
+String[] videoIds = { "123", "abcde", "javasc123" };
+
+foreach (var videoId in videoIds)
+{
+    videoList.Add(new YouTubeVideoProxy(videoId));
+}
+
+videoList.Watch("abcde");
+*/
+#endregion
+
+#endregion
+
+#region -- Flyweight Pattern --
+// Flyweight Pattern
+
+// The Flyweight pattern is a structural design pattern that aims to minimize memory usage by sharing-common state between multiple objects, allowing efficient handling of large numbers of lightweight objects with shared characteristics.
+
+// Say that we have a farming game that includes different types of crops, such as potatoes, carrots and wheat. Each crop is represented by a crop object, that includes its x and y coordinates, the type of crop, and an icon;
+
+#region -- Naive Solution --
+/*
+var cropService = new CropService();
+
+foreach (var crop in cropService.GetCrops())
+{
+    crop.Render();
+}
+*/
+#endregion
+
+#region -- Good Solution
+var cropService = new CropService(new CropIconFactory { });
+
+foreach (var crop in cropService.GetCrops())
+{
+    crop.Render();
+}
 #endregion
 
 #endregion
