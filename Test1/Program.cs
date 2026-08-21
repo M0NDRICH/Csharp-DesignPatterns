@@ -30,6 +30,8 @@ using DesignPatterns.Structural.Bridge.GoodSolution;
 using DesignPatterns.Structural.Proxy.GoodSolution;
 using DesignPatterns.Structural.Proxy.GoodSolution.Package;
 using DesignPatterns.Structural.Flyweight.GoodSolution;
+using DesignPatterns.Structural.Facade;
+using DesignPatterns.Structural.Decorator.GoodSolution;
 //using DesignPatterns.Behavioral.Observer;
 //using DesignPatterns.Behavioral.Template.BadExample;
 //using DesignPatterns.Behavioral.Template.Strategy;
@@ -733,12 +735,107 @@ foreach (var crop in cropService.GetCrops())
 #endregion
 
 #region -- Good Solution
+/*
 var cropService = new CropService(new CropIconFactory { });
 
 foreach (var crop in cropService.GetCrops())
 {
     crop.Render();
 }
+*/
+#endregion
+
+#endregion
+
+#region -- Facade Pattern --
+// Facade Pattern
+
+// The Facade pattern is a structual design pattern that provides a simplified interface to a complex system, encapsulating the complexities of multiple subsystems into a single unified interface for clients.
+
+// Say that we have an eCommerce application that allows users to submit orders.
+#region -- Naive Solution --
+/*
+var orderReq = new OrderRequest();
+
+var auth = new Authenticate();
+
+var inventory = new Inventory();
+foreach (var id in orderReq.ItemIds)
+{
+    inventory.CheckInventory(id);
+}
+
+var payment = new Payment(orderReq.Name, orderReq.CardNumber, orderReq.Amount);
+payment.Pay();
+
+var orderFulFillment = new OrderFulfillment(inventory);
+orderFulFillment.Fulfill(orderReq.Name, orderReq.Address, orderReq.ItemIds);
+*/
+#endregion
+
+#region -- Good Solution --
+/*
+var orderReq = new OrderRequest();
+var orderService = new OrderService();
+orderService.Order(orderReq);
+*/
+#endregion
+
+#endregion
+
+#region -- Decorator Pattern --
+// Decorator Pattern
+
+// The Decorator pattern is a structural design pattern that allows behavior to be added to individual objects dynamically, enhancing functionality without altering the object's structure, and it's used to extend or modify the behavior of objects by wrapping them with additional functionality through composition.
+
+// Say that we have an application that allows users to store data in the cloud. The data can be sent to the cloud as it is, without any processing, and it can also be compressed and/or encrypted before it is saved to the cloud.
+#region -- Naive Solution --
+/*
+// User input data
+var url = "https://google.cloud.com";
+var data = "This is some data. Hello world. Facade Facade :)";
+var compress = true;
+var encrypt = true;
+
+var cloudData = new CloudData(url);
+
+if (compress && encrypt)
+{
+    cloudData = new CompressedAndEncryptedData(url);
+}
+else if (compress)
+{
+    cloudData = new CompressedData(url);
+}
+else if (encrypt)
+{
+    cloudData = new EncryptedData(url);
+}
+
+cloudData.Save(data);
+*/
+#endregion
+
+#region -- Good Solution --
+// User input data
+var url = "https://google.cloud.com";
+var data = "This is some data. Hello world. Facade Facade :)";
+var compress = true;
+var encrypt = true;
+
+IData cloudData = new CloudData(url);
+
+if (encrypt)
+{
+    cloudData = new EncryptionDecorator(cloudData);
+}
+
+if (compress)
+{
+    cloudData = new CompressionDecorator(cloudData);
+}
+
+cloudData.Save(data);
 #endregion
 
 #endregion
