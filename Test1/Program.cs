@@ -1,11 +1,11 @@
 ﻿
 //using DesignPatterns.OopPrinciples.Composition;
 using DesignPatterns.OopPrinciples.Coupling;
-using DesignPatterns.OopPrinciples.Abstraction;
-using DesignPatterns.OopPrinciples.Encapsulation;
-using DesignPatterns.SOLID.L;
-using DesignPatterns.SOLID.I;
-using DesignPatterns.SOLID.D;
+//using DesignPatterns.OopPrinciples.Abstraction;
+//using DesignPatterns.OopPrinciples.Encapsulation;
+//using DesignPatterns.SOLID.L;
+//using DesignPatterns.SOLID.I;
+//using DesignPatterns.SOLID.D;
 //using DesignPatterns.Behavioral.Memento;
 //using DesignPatterns.Behavioral.State;
 using DesignPatterns.Behavioral.State.GoodSolution;
@@ -32,6 +32,8 @@ using DesignPatterns.Structural.Proxy.GoodSolution.Package;
 using DesignPatterns.Structural.Flyweight.GoodSolution;
 using DesignPatterns.Structural.Facade;
 using DesignPatterns.Structural.Decorator.GoodSolution;
+using DesignPatterns.Creational.Prototype.GoodSolution;
+using DesignPatterns.Creational.Singleton;
 //using DesignPatterns.Behavioral.Observer;
 //using DesignPatterns.Behavioral.Template.BadExample;
 //using DesignPatterns.Behavioral.Template.Strategy;
@@ -41,6 +43,7 @@ using DesignPatterns.Structural.Decorator.GoodSolution;
 #region -- OOP Principles --
 
 #region -- Encapsulation --
+/*
 BadBankAccount badAccount = new();
 badAccount.balance = 100;
 
@@ -68,6 +71,7 @@ EmailService emailService = new EmailService();
 //emailService.Disconnect(); 
 
 //emailService.SendEmail();
+*/
 #endregion
 
 #region -- Inheritance --
@@ -179,13 +183,14 @@ Console.WriteLine("\n \n \n");
 //rect.Width = 5;
 //Console.WriteLine("Expected area = 10 * 5 = 50");
 //Console.WriteLine($"Calculate area = {rect.Area}");
+/*
 
 Shape rectangle = new Rectangle() { Width = 5, Height = 4 };
 //Console.WriteLine($"Area of the rectangle: {rectangle.Area}");
 
 Shape square = new Square() { SideLength = 5 };
 //Console.WriteLine($"Area of square: {square.Area}");
-
+*/
 #endregion
 
 #region -- I: Interface Segregation Principle (ISP) --
@@ -203,9 +208,9 @@ circle.Radius = 10;
 // Dependency Inversion Principle (DIP)
 
 // "High-level  modules should not depend on low-level modules. Both should depend on abstractions."
-
+/*
 var car = new Car(new Engine());
-
+*/
 #endregion
 
 #endregion
@@ -817,6 +822,7 @@ cloudData.Save(data);
 #endregion
 
 #region -- Good Solution --
+/*
 // User input data
 var url = "https://google.cloud.com";
 var data = "This is some data. Hello world. Facade Facade :)";
@@ -836,8 +842,96 @@ if (compress)
 }
 
 cloudData.Save(data);
+*/
 #endregion
 
+#endregion
+
+#endregion
+
+#region -- Creational Design Patterns --
+// Creational design patterns
+
+// Creational design patterns are a category of design patterns that focus on object creation, dealing with the best way to create objects while hiding the creation logic and making the system independent of how its objects are created, composed, and represented.
+
+// Benefits:
+// Encapsulation of Object Creation.
+// Enhanced Flexibility and Extensibility
+// Improved Code Reusability
+// Promotion of Separation of Concerns
+// Support for Dependency Injection
+// Centralized Control over Object Creation
+// Enforcement of Design Principles
+
+#region -- Prototype Pattern --
+// Prototype Pattern
+
+// The Prototype pattern is a creational design pattern that allows objects to be copied or cloned, providing a mechanism to create new instances by copying existing objects without explicitly invoking their constructors, and it is used to efficiently produce new instances with identical properties to existing objects.
+
+// Say that we have a GUI that allows the user to create new shapes on the screen, such as circles and rectangles. When the user right-clicks on a shape, an actions menu opens up. The user can then select 'duplicate' to clone the shape.
+
+#region -- Naive Solution --
+/*
+var circle1 = new Circle();
+circle1.Draw();
+
+// user clicks and drags to resize
+circle1.Radius = 12;
+
+// User adds a new rectangle to GUI
+var rectangle1 = new Rectangle();
+rectangle1.Draw();
+// User clicks and drags rectangle to resize
+rectangle1.Width = 20;
+rectangle1.Height = 12;
+
+// user right-clicking and selecting "duplicate"
+var shapeActions = new ShapeActions();
+shapeActions.Duplicate(circle1);
+shapeActions.Duplicate(rectangle1);
+*/
+#endregion
+
+#region -- Good Solution --
+/*
+var circle1 = new Circle();
+circle1.Draw();
+
+// user clicks and drags to resize
+circle1.Radius = 12;
+
+// User adds a new rectangle to GUI
+var rectangle1 = new Rectangle();
+rectangle1.Draw();
+// User clicks and drags rectangle to resize
+rectangle1.Width = 20;
+rectangle1.Height = 12;
+
+// user right-clicking and selecting "duplicate"
+var shapeActions = new ShapeActions();
+IShape newCircle = shapeActions.Duplicate(circle1);
+newCircle.Draw();
+
+IShape newRectangle = shapeActions.Duplicate(rectangle1);
+newRectangle.Draw();
+*/
+#endregion
+
+#endregion
+
+#region -- Singleton Pattern --
+// Singleton Pattern
+
+// The Singleton pattern is a creational design pattern that ensures a class has only one instance and provides a global point of access to that instances. The single instance is commonly used for managing shared resources, configuration settings, or logging functionality within an application.
+
+// A common use case of the Singleton pattern is to use a single global instance of a database object throughout an application. This means that all clients that need to connect to a database will retrieve the same database object, and not be creating new, separate ones. The database object is only created once, the first time it is needed, and then all other clients that need to connect and query the database will use this same object.
+
+var settings =AppSettings.GetInstance();
+settings.Set("app_name", "Design Patterns Mastery");
+settings.Set("app_creator", "Danny");
+
+Console.WriteLine(settings.Get("app_name"));
+Test.Run();
 #endregion
 
 #endregion
